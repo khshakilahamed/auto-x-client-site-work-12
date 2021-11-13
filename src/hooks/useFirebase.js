@@ -1,5 +1,5 @@
 import initializeFirebase from "../pages/Login/firebase/firebase.init";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 
 initializeFirebase();
@@ -10,6 +10,8 @@ const useFirebase = () => {
 
     const auth = getAuth();
 
+    const googleProvider = new GoogleAuthProvider()
+
 
     const registerUser = (name, email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
@@ -18,8 +20,8 @@ const useFirebase = () => {
                 addUserName(name);
             })
             .catch(error => {
-                setError(error);
-                console.log(error);
+                setError(error.message);
+                console.log(error.message);
             })
     }
 
@@ -29,7 +31,7 @@ const useFirebase = () => {
         })
             .then(() => { })
             .catch(error => {
-                setError(error);
+                setError(error.message);
             })
     };
 
@@ -40,7 +42,24 @@ const useFirebase = () => {
                 setUser(result.user);
             })
             .catch(error => {
-                setError(error);
+                setError(error.message);
+            })
+    }
+
+    const loginWithGoogle = () => {
+        signInWithPopup(auth, googleProvider)
+            .then(result => {
+                setUser(result.user);
+            })
+            .catch(error => {
+                setError(error.message);
+            })
+    };
+
+    const handleLogout = () => {
+        signOut(auth)
+            .then(() => {
+                setUser({});
             })
     }
 
@@ -53,7 +72,7 @@ const useFirebase = () => {
                 setUser({});
             }
         });
-    })
+    }, [])
 
 
     return {
@@ -61,6 +80,8 @@ const useFirebase = () => {
         error,
         registerUser,
         loginUser,
+        loginWithGoogle,
+        handleLogout,
     };
 };
 

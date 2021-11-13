@@ -6,9 +6,13 @@ import google from './../../../images/icons/google.png'
 import { NavLink } from 'react-router-dom';
 import LoginForm from '../LoginForm/LoginForm';
 import Register from '../Register/Register';
+import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
+    const { loginWithGoogle } = useAuth();
+
     const [toggle, setToggle] = useState(true);
+
     return (
         <div>
             <Navigation></Navigation>
@@ -40,7 +44,6 @@ const Login = () => {
                                     style={{ cursor: 'pointer', color: 'blue' }}>
                                     <small>Have Account ? click here</small>
                                 </p>
-
                         }
 
 
@@ -48,10 +51,8 @@ const Login = () => {
                             <hr />
                             <p className="or">Or,</p>
                         </div>
-                        <div className="d-flex justify-content-between align-items-center mx-5 mb-5 google-login-container">
-                            <NavLink to="">
-                                <img className="ms-5" style={{ width: 50, height: 50 }} src={google} alt="" />
-                            </NavLink>
+                        <div onClick={loginWithGoogle} className="d-flex justify-content-between align-items-center mx-5 mb-5 google-login-container">
+                            <img className="ms-5" style={{ width: 50, height: 50 }} src={google} alt="" />
                             <p className="me-5 pe-5 pt-3" >Login in with Google</p>
                         </div>
                     </div>
