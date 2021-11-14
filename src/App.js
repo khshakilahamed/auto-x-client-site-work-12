@@ -8,6 +8,7 @@ import Explore from './pages/Explore/Explore';
 import Order from './pages/Order/Order';
 import NotFound from './pages/NotFound/NotFound';
 import Dashboard from './pages/Dashboard/Dashboard/Dashboard';
+import UpdateProduct from './pages/Dashboard/UpdateProduct/UpdateProduct';
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
             </Route>
             <Route path="/login">
               <Login></Login>
+            </Route>
+            <Route path="/updateProduct/:id">
+              <UpdateProduct></UpdateProduct>
             </Route>
             <Route path="/dashboard">
               <Dashboard></Dashboard>

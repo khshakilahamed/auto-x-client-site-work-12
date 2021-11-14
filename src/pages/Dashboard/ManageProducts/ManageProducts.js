@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const ManageProducts = () => {
     const [bikes, setBikes] = useState([]);
@@ -41,9 +42,11 @@ const ManageProducts = () => {
                                 <h4 className="my-3">{bike.bike_name}</h4>
                                 <div className="d-flex justify-content-between px-5 my-3">
                                     <p>
-                                        <button
-                                            className="btn btn-success"
-                                        >Update</button>
+                                        <NavLink to={`/updateProduct/${bike._id}`}>
+                                            <button
+                                                className="btn btn-success"
+                                            >Update</button>
+                                        </NavLink>
                                     </p>
                                     <p>
                                         <button

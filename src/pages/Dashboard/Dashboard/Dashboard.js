@@ -24,7 +24,7 @@ const Dashboard = () => {
     const { handleLogout } = useAuth();
     let { path, url } = useRouteMatch();
     // const [isTrue, setIsTrue] = useState(true);
-    const isTrue = false;
+    const isTrue = true;
     return (
         <div>
             <Navigation></Navigation>
