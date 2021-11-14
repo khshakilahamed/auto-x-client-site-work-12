@@ -18,6 +18,7 @@ import Review from '../Review/Review';
 import useAuth from '../../../hooks/useAuth';
 import ManageProducts from '../ManageProducts/ManageProducts';
 import AddProduct from '../AddProduct/AddProduct';
+import ManageOrders from '../ManageOrders/ManageOrders';
 
 const Dashboard = () => {
     const { handleLogout } = useAuth();
@@ -37,6 +38,8 @@ const Dashboard = () => {
                             <Link className="dashboard-option fw-bold" to={`${url}/payment`}>Make Payment</Link>
                             <br />
                             <Link className="dashboard-option fw-bold" to={`${url}/review`}>Review</Link>
+                            <br />
+                            <Link className="dashboard-option fw-bold" to={`${url}/manageOrders`}>Manage Orders</Link>
                             <br />
                             <Link className="dashboard-option fw-bold" to={`${url}/manageProducts`}>Manage Products</Link>
                             <br />
@@ -64,6 +67,9 @@ const Dashboard = () => {
                             </Route>
                             <Route path={`${path}/review`}>
                                 <Review></Review>
+                            </Route>
+                            <Route path={`${path}/manageOrders`}>
+                                <ManageOrders></ManageOrders>
                             </Route>
                             <Route path={`${path}/manageProducts`}>
                                 <ManageProducts></ManageProducts>
