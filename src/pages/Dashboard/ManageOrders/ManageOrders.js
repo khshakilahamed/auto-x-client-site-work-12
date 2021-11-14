@@ -27,6 +27,11 @@ const ManageOrders = () => {
                 }
             })
                 .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        alert('Deleted Successfully');
+                    }
+                })
         }
 
     };
