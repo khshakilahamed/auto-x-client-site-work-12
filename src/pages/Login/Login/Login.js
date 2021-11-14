@@ -26,7 +26,7 @@ const Login = () => {
                             </div>
                                 :
                                 <div>
-                                    <Register></Register>
+                                    <Register ></Register>
                                 </div>
                         }
 
@@ -45,6 +45,8 @@ const Login = () => {
                                     <small>Have Account ? click here</small>
                                 </p>
                         }
+
+
 
 
                         <div>

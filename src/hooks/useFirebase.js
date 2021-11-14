@@ -18,10 +18,11 @@ const useFirebase = () => {
             .then(result => {
                 setUser(result.user);
                 addUserName(name);
+                saveUser(name, email);
+                setError('');
             })
             .catch(error => {
                 setError(error.message);
-                console.log(error.message);
             })
     }
 
@@ -40,6 +41,7 @@ const useFirebase = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
                 setUser(result.user);
+                setError('');
             })
             .catch(error => {
                 setError(error.message);
@@ -49,7 +51,10 @@ const useFirebase = () => {
     const loginWithGoogle = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
-                setUser(result.user);
+                const user = result.user;
+                setUser(user);
+                saveGoogleUser(user.displayName, user.email);
+                setError('');
             })
             .catch(error => {
                 setError(error.message);
@@ -72,7 +77,37 @@ const useFirebase = () => {
                 setUser({});
             }
         });
-    }, [])
+    }, []);
+
+
+    const saveUser = (displayName, email) => {
+        const user = { displayName, email };
+        console.log(user);
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+    }
+
+    const saveGoogleUser = (displayName, email) => {
+        const user = { displayName, email };
+        console.log(user);
+        fetch('http://localhost:5000/users', {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+    }
 
 
     return {

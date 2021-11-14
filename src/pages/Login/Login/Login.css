@@ -5,7 +5,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 600px;
+    height: 700px;
 }
 
 .login-form-container{
@@ -22,7 +22,7 @@
     flex-direction: column;
     
 }
-.login-form input, button{
+.login-form input, .login-form button{
     padding: 10px;
     margin: 10px 20px;
     outline: none;

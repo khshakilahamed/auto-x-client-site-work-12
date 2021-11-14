@@ -24,10 +24,14 @@ const Navigation = () => {
                                 </NavLink>
                             </Nav.Link>
                             <Nav.Link >
-                                <span className="nav-item">Features</span>
+                                <NavLink to="/explore" style={{ textDecoration: 'none' }}>
+                                    <span className="nav-item" >Explore</span>
+                                </NavLink>
                             </Nav.Link>
                             <Nav.Link >
-                                <span className="nav-item">Pricing</span>
+                                <NavLink to="/dashboard" style={{ textDecoration: 'none' }}>
+                                    <span className="nav-item" >Dashboard</span>
+                                </NavLink>
                             </Nav.Link>
                         </Nav>
 

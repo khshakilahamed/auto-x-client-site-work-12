@@ -21,7 +21,7 @@ const Footer = () => {
                             <img className="twitter" src={"https://i.ibb.co/FHw3fg9/twitter.png"} alt="" />
                         </div>
 
-                        <p className="mt-3">@ 2021 AutoX Designed by Kh. Shakil</p>
+
                     </div>
                     <div className="col-md-5 mt-3  px-3">
                         <h4 className="text-uppercase mb-3">Let us know your Suggestion</h4>
@@ -43,6 +43,7 @@ const Footer = () => {
                     </div>
 
                 </div>
+                <p className="mt-3 text-center mt-5">@ 2021 AutoX Designed by Kh. Shakil</p>
             </div>
         </div>
     );
