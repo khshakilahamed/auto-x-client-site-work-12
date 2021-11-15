@@ -16,7 +16,7 @@ const MakeAdmin = () => {
         const confirmAdmin = window.confirm('Sure you want to make an Admin?');
 
         if (confirmAdmin) {
-            fetch(`http://localhost:5000/users/admin`, {
+            fetch(`https://powerful-tundra-44421.herokuapp.com/users/admin`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

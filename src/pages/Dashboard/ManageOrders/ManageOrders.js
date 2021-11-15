@@ -7,7 +7,7 @@ const ManageOrders = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders`)
+        fetch(`https://powerful-tundra-44421.herokuapp.com/orders`)
             .then(res => res.json())
             .then(data => {
                 setOrders(data);
@@ -19,7 +19,7 @@ const ManageOrders = () => {
     const handleDeleteOrder = id => {
         const confirmOrder = window.confirm('Are you sure, want to delete the order ?');
         if (confirmOrder) {
-            fetch(`http://localhost:5000/orders/${id}`, {
+            fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application.json'
@@ -42,7 +42,7 @@ const ManageOrders = () => {
             const matchedOrder = orders.filter(order => order._id == id);
             matchedOrder[0].orderStatus = "Approved";
 
-            fetch(`http://localhost:5000/orders/${id}`, {
+            fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

@@ -46,7 +46,7 @@ const UpdateProduct = () => {
         const confirmUpdate = window.confirm("Are you sure want to update ?");
 
         if (confirmUpdate) {
-            fetch(`http://localhost:5000/bikes/${id}`, {
+            fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
@@ -64,7 +64,7 @@ const UpdateProduct = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/bikes/${id}`)
+        fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`)
             .then(res => res.json())
             .then(data => setBike(data))
     }, []);

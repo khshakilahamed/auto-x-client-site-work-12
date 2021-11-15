@@ -8,7 +8,7 @@ const MyOrders = () => {
     // console.log(orders);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${user.email}`)
+        fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setOrders(data);
@@ -18,7 +18,7 @@ const MyOrders = () => {
     const handleCancelOrder = id => {
         const confirmOrder = window.confirm('Are you sure, want to delete the order ?');
         if (confirmOrder) {
-            fetch(`http://localhost:5000/orders/${id}`, {
+            fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application.json'

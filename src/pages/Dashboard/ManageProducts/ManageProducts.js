@@ -5,7 +5,7 @@ const ManageProducts = () => {
     const [bikes, setBikes] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/bikes')
+        fetch('https://powerful-tundra-44421.herokuapp.com/bikes')
             .then(res => res.json())
             .then(data => setBikes(data))
     }, [bikes]);
@@ -13,7 +13,7 @@ const ManageProducts = () => {
     const handleDeleteBike = id => {
         const confirmDelete = window.confirm("Are you sure want to delete the bike ?");
         if (confirmDelete) {
-            fetch(`http://localhost:5000/bikes/${id}`, {
+            fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application/json'
