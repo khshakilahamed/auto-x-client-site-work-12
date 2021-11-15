@@ -19,12 +19,12 @@ import useAuth from '../../../hooks/useAuth';
 import ManageProducts from '../ManageProducts/ManageProducts';
 import AddProduct from '../AddProduct/AddProduct';
 import ManageOrders from '../ManageOrders/ManageOrders';
+import AdminRoute from '../../AdminRoute/AdminRoute';
 
 const Dashboard = () => {
     const { handleLogout, admin } = useAuth();
     let { path, url } = useRouteMatch();
-    // const [isTrue, setIsTrue] = useState(true);
-    const isTrue = true;
+
     return (
         <div>
             <Navigation></Navigation>
@@ -73,18 +73,18 @@ const Dashboard = () => {
                             <Route path={`${path}/review`}>
                                 <Review></Review>
                             </Route>
-                            <Route path={`${path}/manageOrders`}>
+                            <AdminRoute path={`${path}/manageOrders`}>
                                 <ManageOrders></ManageOrders>
-                            </Route>
-                            <Route path={`${path}/manageProducts`}>
+                            </AdminRoute>
+                            <AdminRoute path={`${path}/manageProducts`}>
                                 <ManageProducts></ManageProducts>
-                            </Route>
-                            <Route path={`${path}/addProduct`}>
+                            </AdminRoute>
+                            <AdminRoute path={`${path}/addProduct`}>
                                 <AddProduct></AddProduct>
-                            </Route>
-                            <Route path={`${path}/makeAdmin`}>
+                            </AdminRoute>
+                            <AdminRoute path={`${path}/makeAdmin`}>
                                 <MakeAdmin></MakeAdmin>
-                            </Route>
+                            </AdminRoute>
                         </Switch>
                     </div>
                 </div>

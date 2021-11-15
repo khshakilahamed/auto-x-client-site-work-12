@@ -9,6 +9,7 @@ import Order from './pages/Order/Order';
 import NotFound from './pages/NotFound/NotFound';
 import Dashboard from './pages/Dashboard/Dashboard/Dashboard';
 import UpdateProduct from './pages/Dashboard/UpdateProduct/UpdateProduct';
+import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -25,18 +26,18 @@ function App() {
             <Route path="/explore">
               <Explore></Explore>
             </Route>
-            <Route path="/order/:id">
+            <PrivateRoute path="/order/:id">
               <Order></Order>
-            </Route>
+            </PrivateRoute>
             <Route path="/login">
               <Login></Login>
             </Route>
-            <Route path="/updateProduct/:id">
+            <PrivateRoute path="/updateProduct/:id">
               <UpdateProduct></UpdateProduct>
-            </Route>
-            <Route path="/dashboard">
+            </PrivateRoute>
+            <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>
-            </Route>
+            </PrivateRoute>
             <Route path="*">
               <NotFound></NotFound>
             </Route>

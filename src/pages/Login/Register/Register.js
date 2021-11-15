@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 
 const Register = () => {
@@ -7,6 +8,9 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const location = useLocation();
+    const history = useHistory();
 
 
     const handleNameChange = e => {
@@ -23,7 +27,7 @@ const Register = () => {
     }
 
     const createNewUser = e => {
-        registerUser(name, email, password);
+        registerUser(name, email, password, location, history);
         setName('');
 
         e.preventDefault();

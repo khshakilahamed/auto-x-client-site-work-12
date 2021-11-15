@@ -8,23 +8,28 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
     const [admin, setAdmin] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const auth = getAuth();
 
     const googleProvider = new GoogleAuthProvider()
 
 
-    const registerUser = (name, email, password) => {
+    const registerUser = (name, email, password, location, history) => {
+        setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 setUser(result.user);
                 addUserName(name);
                 saveUser(name, email);
+                const destination = location?.state?.from || '/';
+                history.push(destination);
                 setError('');
             })
             .catch(error => {
                 setError(error.message);
             })
+            .finally(() => setIsLoading(false))
     }
 
     const addUserName = (name) => {
@@ -38,10 +43,12 @@ const useFirebase = () => {
     };
 
 
-    const loginUser = (email, password) => {
+    const loginUser = (email, password, location, history) => {
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
                 setUser(result.user);
+                const destination = location?.state?.from || '/';
+                history.push(destination);
                 setError('');
             })
             .catch(error => {
@@ -49,12 +56,14 @@ const useFirebase = () => {
             })
     }
 
-    const loginWithGoogle = () => {
+    const loginWithGoogle = (location, history) => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 const user = result.user;
                 setUser(user);
                 saveGoogleUser(user.displayName, user.email);
+                const destination = location?.state?.from || '/';
+                history.push(destination);
                 setError('');
             })
             .catch(error => {

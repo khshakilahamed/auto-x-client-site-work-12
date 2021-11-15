@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import useFirebase from '../../../hooks/useFirebase';
 
 const LoginForm = () => {
@@ -6,6 +7,9 @@ const LoginForm = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const location = useLocation();
+    const history = useHistory();
 
 
 
@@ -17,7 +21,7 @@ const LoginForm = () => {
     }
 
     const handleUserLogin = e => {
-        loginUser(email, password);
+        loginUser(email, password, location, history);
         e.preventDefault();
     }
     return (
