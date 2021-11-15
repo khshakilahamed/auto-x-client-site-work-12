@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import './Footer.css';
 
 
@@ -8,6 +10,7 @@ import './Footer.css';
 // https://i.ibb.co/FHw3fg9/twitter.png
 
 const Footer = () => {
+    const { handleLogout } = useAuth();
     return (
         <div className="text-light bg-dark py-5">
             <div className="container">
@@ -39,6 +42,10 @@ const Footer = () => {
                             <Link to="/packages" className="navItems">Packages</Link>
                             <Link to="/blogs" className="navItems">Blogs</Link>
                             <Link to="/about" className="navItems">About Us</Link> */}
+                            <Link style={{ textDecoration: 'none', color: 'white' }} to="/home" className="navItems">Home</Link>
+                            <Link style={{ textDecoration: 'none', color: 'white' }} to="/dashboard" className="navItems">Dashboard</Link>
+                            <Link style={{ textDecoration: 'none', color: 'white' }} to="/explore" className="navItems">Explore</Link>
+                            <Link style={{ textDecoration: 'none', color: 'white' }} to="" className="navItems" onClick={handleLogout}>logout</Link>
                         </div>
                     </div>
 

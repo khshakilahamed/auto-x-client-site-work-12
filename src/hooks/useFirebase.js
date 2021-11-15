@@ -12,7 +12,8 @@ const useFirebase = () => {
 
     const auth = getAuth();
 
-    const googleProvider = new GoogleAuthProvider()
+
+    const googleProvider = new GoogleAuthProvider();
 
 
     const registerUser = (name, email, password, location, history) => {
