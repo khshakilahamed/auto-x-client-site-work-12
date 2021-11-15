@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
 import useFirebase from '../../../hooks/useFirebase';
 
 const LoginForm = () => {
-    const { loginUser, error } = useFirebase();
+    const { loginUser, error, isLoading } = useFirebase();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -27,6 +28,9 @@ const LoginForm = () => {
     return (
         <div>
             <h3 className="my-4 login-title text-center">Please, Login here</h3>
+            {
+                isLoading && <Spinner animation="border" variant="danger" />
+            }
             <form onSubmit={handleUserLogin} className="login-form">
                 <input onBlur={handleEmailChange} type="email" name="" id="" placeholder="Email" />
                 <input onBlur={handlePasswordChange} type="password" name="" id="" placeholder="Password" />

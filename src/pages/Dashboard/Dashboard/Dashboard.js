@@ -4,11 +4,9 @@ import Navigation from '../../Shared/Navigation/Navigation';
 import './Dashboard.css'
 
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
     Link,
-    useParams,
     useRouteMatch
 } from "react-router-dom";
 import MyOrders from '../MyOrders/MyOrders';

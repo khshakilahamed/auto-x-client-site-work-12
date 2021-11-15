@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import Footer from '../Shared/Footer/Footer';
@@ -6,7 +7,7 @@ import Navigation from '../Shared/Navigation/Navigation';
 import './Order.css'
 
 const Order = () => {
-    const { user } = useAuth();
+    const { user, isLoading } = useAuth();
     const { id } = useParams();
 
     const [bike, setBike] = useState({});
@@ -66,6 +67,9 @@ const Order = () => {
             <Navigation></Navigation>
             <div className="container">
                 <h2 className="text-center my-5 text-danger">Please, Provide here some information to confirm the order</h2>
+                {
+                    isLoading && <Spinner animation="border" variant="danger" />
+                }
                 <div className="row">
                     <div className="col-md-5">
                         <h3 className="bg-danger text-light ps-5">{bike_name}</h3>

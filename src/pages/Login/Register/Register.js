@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 
 const Register = () => {
-    const { registerUser, error } = useAuth();
+    const { registerUser, error, isLoading } = useAuth();
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -36,6 +37,9 @@ const Register = () => {
     return (
         <div>
             <h3 className="my-4 login-title text-center">Please, Register here</h3>
+            {
+                isLoading && <Spinner animation="border" variant="danger" />
+            }
             <form onSubmit={createNewUser} className="login-form">
                 <input onBlur={handleNameChange} type="text" name="" id="" placeholder="Name" />
                 <input onBlur={handleEmailChange} type="email" name="" id="" placeholder="Email" />

@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import './Bike.css'
 
 const Bike = ({ bike }) => {
-    // console.log(bike);
     const { _id, bike_name, image, short_des, brand, price } = bike;
     return (
         <div className="col-md-4 col-sm-6 my-3">
