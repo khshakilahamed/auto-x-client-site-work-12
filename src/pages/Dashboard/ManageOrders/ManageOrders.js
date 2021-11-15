@@ -5,10 +5,9 @@ const ManageOrders = () => {
     const { user } = useAuth();
 
     const [orders, setOrders] = useState([]);
-    // console.log(orders);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${user.email}`)
+        fetch(`http://localhost:5000/orders`)
             .then(res => res.json())
             .then(data => {
                 setOrders(data);
@@ -60,8 +59,9 @@ const ManageOrders = () => {
             <table class="table table-success table-striped">
                 <thead>
                     <tr>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Customer Address</th>
                         <th scope="col">Product Name</th>
-                        <th scope="col">Address</th>
                         <th scope="col">Price</th>
                         <th scope="col">Status</th>
                         <th scope="col"></th>
@@ -70,12 +70,13 @@ const ManageOrders = () => {
                 <tbody>
                     {
                         orders.map(order => <tr>
-                            <td>{order.bike_name}</td>
-                            <td>{order.userAddress}</td>
-                            <td>{order.orderStatus}</td>
-                            <td>{order.price}</td>
-                            <td>
-                                <button onClick={() => handleDeleteOrder(order._id)} style={{ border: 'none', backgroundColor: 'red', color: 'white', borderRadius: '5px' }}>Delete</button>
+                            <td className="border-end">Name: {order.userName} <br /> Email: {order.userEmail} <br /> Phone: {order.userPhoneNumber}</td>
+                            <td className="border-end">{order.userAddress} </td>
+                            <td className="border-end">{order.bike_name}</td>
+                            <td className="border-end">{order.orderStatus}</td>
+                            <td className="border-end">{order.price}</td>
+                            <td className="border-end">
+                                <button onClick={() => handleDeleteOrder(order._id)} style={{ border: 'none', backgroundColor: 'red', color: 'white', borderRadius: '5px', marginBottom: '5px' }}>Delete</button>
                                 {
                                     order.orderStatus == 'pending' && <button onClick={() => handleApproveOrder(order._id)} style={{ border: 'none', marginLeft: '5px', backgroundColor: 'green', color: 'white', borderRadius: '5px' }}>Approve</button>
                                 }

@@ -21,7 +21,7 @@ import AddProduct from '../AddProduct/AddProduct';
 import ManageOrders from '../ManageOrders/ManageOrders';
 
 const Dashboard = () => {
-    const { handleLogout } = useAuth();
+    const { handleLogout, admin } = useAuth();
     let { path, url } = useRouteMatch();
     // const [isTrue, setIsTrue] = useState(true);
     const isTrue = true;
@@ -33,19 +33,24 @@ const Dashboard = () => {
                     <div className="col-md-2">
                         <div className="py-5 border-end">
                             <h3 className="text-danger">Dashboard</h3>
-                            <Link className="dashboard-option fw-bold" to={`${url}/myorder`}>My Orders</Link>
-                            <br />
-                            <Link className="dashboard-option fw-bold" to={`${url}/payment`}>Make Payment</Link>
-                            <br />
-                            <Link className="dashboard-option fw-bold" to={`${url}/review`}>Review</Link>
-                            <br />
-                            <Link className="dashboard-option fw-bold" to={`${url}/manageOrders`}>Manage Orders</Link>
-                            <br />
-                            <Link className="dashboard-option fw-bold" to={`${url}/manageProducts`}>Manage Products</Link>
-                            <br />
-                            <Link className="dashboard-option fw-bold" to={`${url}/addProduct`}>Add a Product</Link>
-                            <br />
-                            <Link className="dashboard-option fw-bold" to={`${url}/makeAdmin`}>Make Admin</Link>
+
+                            {
+                                !admin ? <>
+                                    <Link className="dashboard-option fw-bold" to={`${url}/myorder`}>My Orders</Link>
+                                    <br />
+                                    <Link className="dashboard-option fw-bold" to={`${url}/payment`}>Make Payment</Link>
+                                    <br />
+                                    <Link className="dashboard-option fw-bold" to={`${url}/review`}>Review</Link>
+                                    <br />
+                                </> : <>
+                                    <Link className="dashboard-option fw-bold" to={`${url}/manageOrders`}>Manage Orders</Link>
+                                    <br />
+                                    <Link className="dashboard-option fw-bold" to={`${url}/manageProducts`}>Manage Products</Link>
+                                    <br />
+                                    <Link className="dashboard-option fw-bold" to={`${url}/addProduct`}>Add a Product</Link>
+                                    <br />
+                                    <Link className="dashboard-option fw-bold" to={`${url}/makeAdmin`}>Make Admin</Link></>
+                            }
                             <br />
                             <Link className="dashboard-option fw-bold" to={`/login`}> <p onClick={handleLogout}>Logout</p></Link>
                         </div>
@@ -55,7 +60,7 @@ const Dashboard = () => {
                         <Switch>
                             <Route exact path={path}>
                                 {
-                                    isTrue ? <MyOrders></MyOrders> : <MakeAdmin></MakeAdmin>
+                                    !admin ? <MyOrders></MyOrders> : <ManageOrders></ManageOrders>
                                 }
                             </Route>
 
