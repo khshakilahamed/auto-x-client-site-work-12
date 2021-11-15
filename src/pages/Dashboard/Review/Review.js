@@ -16,8 +16,21 @@ const Review = () => {
 
     const handleReview = e => {
         e.preventDefault();
-        const review = { displayName: user.displayName, email: user.email, rating, reviewText }
-        console.log(review);
+        const newReview = { displayName: user.displayName, email: user.email, rating, reviewText }
+        fetch('http://localhost:5000/reviews', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newReview)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    alert('Review Added Successfully!');
+                    console.log(data);
+                }
+            })
     }
     return (
         <div className="container">

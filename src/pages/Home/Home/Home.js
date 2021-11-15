@@ -4,6 +4,7 @@ import Navigation from '../../Shared/Navigation/Navigation';
 import Banner from '../Banner/Banner';
 import Bike from '../Bikes/Bike/Bike';
 import Brands from '../Brands/Brands';
+import ShowReview from '../ShowReview/ShowReview';
 
 const Home = () => {
     const [bikes, setBikes] = useState([]);
@@ -28,6 +29,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <ShowReview></ShowReview>
             <Footer></Footer>
         </div>
     );
