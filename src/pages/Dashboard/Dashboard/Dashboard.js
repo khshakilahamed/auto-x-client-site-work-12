@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Footer from '../../Shared/Footer/Footer';
 import Navigation from '../../Shared/Navigation/Navigation';
 import './Dashboard.css'
@@ -18,10 +18,15 @@ import ManageProducts from '../ManageProducts/ManageProducts';
 import AddProduct from '../AddProduct/AddProduct';
 import ManageOrders from '../ManageOrders/ManageOrders';
 import AdminRoute from '../../AdminRoute/AdminRoute';
+import { Spinner } from 'react-bootstrap';
 
 const Dashboard = () => {
-    const { handleLogout, admin } = useAuth();
+    const { handleLogout, admin, isLoading } = useAuth();
     let { path, url } = useRouteMatch();
+
+    if (isLoading) {
+        return <div className="text-center"><Spinner animation="border" variant="danger" /></div>
+    }
 
     return (
         <div>

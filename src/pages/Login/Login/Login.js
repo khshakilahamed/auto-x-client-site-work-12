@@ -53,9 +53,6 @@ const Login = () => {
                                 </p>
                         }
 
-
-
-
                         <div>
                             <hr />
                             <p className="or">Or,</p>

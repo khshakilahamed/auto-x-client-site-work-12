@@ -10,12 +10,15 @@ import NotFound from './pages/NotFound/NotFound';
 import Dashboard from './pages/Dashboard/Dashboard/Dashboard';
 import UpdateProduct from './pages/Dashboard/UpdateProduct/UpdateProduct';
 import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
+import ScrollToTop from './ScrollTopTop/ScrollToTop';
+
 
 function App() {
   return (
     <div className="">
       <AuthProvider>
         <Router>
+          <ScrollToTop />
           <Switch>
             <Route exact path="/">
               <Home></Home>

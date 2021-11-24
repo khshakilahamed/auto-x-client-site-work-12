@@ -100,7 +100,7 @@ const useFirebase = () => {
             setIsLoading(false);
         });
         return () => unsubscribed;
-    }, []);
+    }, [auth]);
 
     useEffect(() => {
         fetch(`https://powerful-tundra-44421.herokuapp.com/users/${user.email}`)

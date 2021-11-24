@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Footer from '../../Shared/Footer/Footer';
 import Navigation from '../../Shared/Navigation/Navigation';
@@ -67,14 +67,14 @@ const UpdateProduct = () => {
         fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`)
             .then(res => res.json())
             .then(data => setBike(data))
-    }, []);
+    }, [id]);
 
     return (
         <div>
             <Navigation></Navigation>
             <div className="container">
                 <div className="my-5">
-                    <h3>This is Update Product: {id}</h3>
+                    <h3 className="text-center bg-danger text-light py-2 mb-4">Update details from here</h3>
                     <form onSubmit={handleAddBike} className="add-product-form">
                         <input onChange={handleBikeNameChange} value={bike_name} type="text" placeholder="Bike Name" />
 

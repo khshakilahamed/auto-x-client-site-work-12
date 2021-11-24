@@ -4,7 +4,9 @@ import { useParams } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import Footer from '../Shared/Footer/Footer';
 import Navigation from '../Shared/Navigation/Navigation';
-import './Order.css'
+import './Order.css';
+import swal from 'sweetalert';
+
 
 const Order = () => {
     const { user, isLoading } = useAuth();
@@ -48,7 +50,8 @@ const Order = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('Order Confirmed');
+                    // alert('Order Confirmed');
+                    swal("Success!", "Order Placed!", "success");
                     e.target.reset();
                 }
             })
@@ -61,7 +64,8 @@ const Order = () => {
             .then(data => {
                 setBike(data);
             })
-    }, []);
+    }, [id]);
+
     return (
         <div>
             <Navigation></Navigation>
@@ -70,14 +74,14 @@ const Order = () => {
                 {
                     isLoading && <Spinner animation="border" variant="danger" />
                 }
-                <div className="row">
+                <div className="row my-5">
                     <div className="col-md-5">
                         <h3 className="bg-danger text-light ps-5">{bike_name}</h3>
                         <img className="img-fluid w-100" src={image} alt="" />
                         <div className="text-start ps-5 my-3">
-                            <h3>BDT. {price}</h3>
-                            <small className="text-muted">{short_des}</small>
                             <p className="my-3"><span className="bg-danger text-light p-1 rounded">{brand}</span></p>
+                            <small className="text-muted">{short_des}</small>
+                            <h3>BDT. {price}</h3>
                         </div>
                     </div>
                     <div className="col-md-7">

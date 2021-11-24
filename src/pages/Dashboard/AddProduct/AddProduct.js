@@ -1,12 +1,23 @@
 import React, { useRef } from 'react';
+import { Spinner } from 'react-bootstrap';
+import useAuth from '../../../hooks/useAuth';
 import './AddProduct.css'
 
 const AddProduct = () => {
+    const { isLoading } = useAuth();
+
     const bikeNameRef = useRef();
     const brandRef = useRef();
     const descriptionRef = useRef();
     const imageUrlRef = useRef();
     const priceRef = useRef();
+
+    if (isLoading) {
+        return <div>
+            <div className="text-center"><Spinner animation="border" variant="danger" /></div>
+        </div>
+    }
+
 
     const handleAddBike = e => {
         e.preventDefault();

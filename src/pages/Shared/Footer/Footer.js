@@ -10,7 +10,7 @@ import './Footer.css';
 // https://i.ibb.co/FHw3fg9/twitter.png
 
 const Footer = () => {
-    const { handleLogout } = useAuth();
+    const { user, handleLogout } = useAuth();
     return (
         <div className="text-light bg-dark py-5">
             <div className="container">
@@ -37,15 +37,15 @@ const Footer = () => {
                     <div className="col-md-3 mt-3">
                         <h4 className="text-center text-uppercase mb-3">Quick Links</h4>
                         <div className="quick-links text-center">
-                            {/* <Link to="/home" className="navItems">Home</Link>
-                            <Link to="/services" className="navItems">Services</Link>
-                            <Link to="/packages" className="navItems">Packages</Link>
-                            <Link to="/blogs" className="navItems">Blogs</Link>
-                            <Link to="/about" className="navItems">About Us</Link> */}
                             <Link style={{ textDecoration: 'none', color: 'white' }} to="/home" className="navItems">Home</Link>
                             <Link style={{ textDecoration: 'none', color: 'white' }} to="/dashboard" className="navItems">Dashboard</Link>
                             <Link style={{ textDecoration: 'none', color: 'white' }} to="/explore" className="navItems">Explore</Link>
-                            <Link style={{ textDecoration: 'none', color: 'white' }} to="" className="navItems" onClick={handleLogout}>logout</Link>
+                            {
+                                user?.email ? <Link style={{ textDecoration: 'none', color: 'white' }} to="" className="navItems" onClick={handleLogout}>logout</Link>
+                                    :
+                                    <Link style={{ textDecoration: 'none', color: 'white' }} to="/login" className="navItems">login</Link>
+                            }
+
                         </div>
                     </div>
 

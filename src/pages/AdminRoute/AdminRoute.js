@@ -1,9 +1,14 @@
 import React from 'react';
+import { Spinner } from 'react-bootstrap';
 import { Redirect, Route } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 
 const AdminRoute = ({ children, ...rest }) => {
     const { user, admin } = useAuth();
+    if (!admin) {
+        return <div className="text-center" ><Spinner animation="border" variant="danger" /></div>
+    }
+
     return (
         <Route
             {...rest}
@@ -13,7 +18,7 @@ const AdminRoute = ({ children, ...rest }) => {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: "/login",
+                            pathname: "/home",
                             state: { from: location }
                         }}
                     />

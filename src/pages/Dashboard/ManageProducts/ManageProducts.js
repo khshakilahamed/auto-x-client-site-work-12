@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 const ManageProducts = () => {
@@ -33,10 +34,12 @@ const ManageProducts = () => {
         <div>
             <h3 className="text-center bg-danger text-light my-4 py-2">All Bikes</h3>
             <div className="text-center">
-                {/* <h2 className="text-danger">Bikes for You</h2> */}
+                {
+                    !bikes && <div className="text-center"><Spinner animation="border" variant="danger" /></div>
+                }
                 <div className="row my-5">
                     {
-                        bikes.map(bike => <div key={bike._id} className="col-md-4">
+                        bikes?.map(bike => <div key={bike._id} className="col-md-4">
                             <div className="border m-2">
                                 <img src={bike.image} alt="" />
                                 <h4 className="my-3">{bike.bike_name}</h4>

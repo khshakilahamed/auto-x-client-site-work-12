@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import useAuth from '../../../hooks/useAuth';
+import { Spinner } from 'react-bootstrap';
 
 const ManageOrders = () => {
-    const { user } = useAuth();
-
     const [orders, setOrders] = useState([]);
+
+
 
     useEffect(() => {
         fetch(`https://powerful-tundra-44421.herokuapp.com/orders`)
@@ -13,6 +13,10 @@ const ManageOrders = () => {
                 setOrders(data);
             })
     }, [orders]);
+
+    // if (isLoading) {
+    //     return <div className="text-center "><Spinner animation="border" variant="danger" /></div>
+    // }
 
     // console.log(orders);
 
@@ -39,7 +43,7 @@ const ManageOrders = () => {
         const approved = window.confirm('Are you sure ?');
 
         if (approved) {
-            const matchedOrder = orders.filter(order => order._id == id);
+            const matchedOrder = orders.filter(order => order._id === id);
             matchedOrder[0].orderStatus = "Approved";
 
             fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
@@ -56,6 +60,9 @@ const ManageOrders = () => {
     return (
         <div>
             <h3 className="text-center bg-danger text-light my-4 py-2">All Orders</h3>
+            {
+                !orders && <div className="text-center"><Spinner animation="border" variant="danger" /></div>
+            }
             <table class="table table-success table-striped">
                 <thead>
                     <tr>
@@ -73,12 +80,12 @@ const ManageOrders = () => {
                             <td className="border-end">Name: {order.userName} <br /> Email: {order.userEmail} <br /> Phone: {order.userPhoneNumber}</td>
                             <td className="border-end">{order.userAddress} </td>
                             <td className="border-end">{order.bike_name}</td>
-                            <td className="border-end">{order.orderStatus}</td>
                             <td className="border-end">{order.price}</td>
+                            <td className="border-end">{order.orderStatus}</td>
                             <td className="border-end">
                                 <button onClick={() => handleDeleteOrder(order._id)} style={{ border: 'none', backgroundColor: 'red', color: 'white', borderRadius: '5px', marginBottom: '5px' }}>Delete</button>
                                 {
-                                    order.orderStatus == 'pending' && <button onClick={() => handleApproveOrder(order._id)} style={{ border: 'none', marginLeft: '5px', backgroundColor: 'green', color: 'white', borderRadius: '5px' }}>Approve</button>
+                                    order.orderStatus === 'pending' && <button onClick={() => handleApproveOrder(order._id)} style={{ border: 'none', marginLeft: '5px', backgroundColor: 'green', color: 'white', borderRadius: '5px' }}>Approve</button>
                                 }
                             </td>
                         </tr>)

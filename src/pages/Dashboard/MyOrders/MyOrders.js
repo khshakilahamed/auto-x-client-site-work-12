@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import swal from 'sweetalert';
 import useAuth from '../../../hooks/useAuth';
 
 const MyOrders = () => {
@@ -13,19 +14,48 @@ const MyOrders = () => {
             .then(data => {
                 setOrders(data);
             })
-    }, [orders]);
+    }, [user.email]);
 
     const handleCancelOrder = id => {
-        const confirmOrder = window.confirm('Are you sure, want to delete the order ?');
-        if (confirmOrder) {
-            fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'content-type': 'application.json'
+        // const confirmOrder = window.confirm('Are you sure, want to delete the order ?');
+
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this order!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'content-type': 'application.json'
+                        }
+                    })
+                        .then(res => res.json());
+
+                    swal("Success! Your Order has been deleted!", {
+                        icon: "success",
+                    });
                 }
-            })
-                .then(res => res.json())
-        }
+                else {
+                    swal("Your order is safe!");
+                }
+            });
+
+        // if (confirmOrder) {
+        //     fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
+        //         method: 'DELETE',
+        //         headers: {
+        //             'content-type': 'application.json'
+        //         }
+        //     })
+        //         .then(res => res.json())
+        //         .then(data => console.log(data))
+        // }
 
     }
 
@@ -46,8 +76,8 @@ const MyOrders = () => {
                     {
                         orders.map(order => <tr>
                             <td>{order.bike_name}</td>
-                            <td>{order.userAddress}</td>
                             <td>{order.orderStatus}</td>
+                            <td>{order.userAddress}</td>
                             <td>{order.price}</td>
                             <td>
                                 <button onClick={() => handleCancelOrder(order._id)} style={{ border: 'none' }}>Cancel</button>

@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
+import { Spinner } from 'react-bootstrap';
+import useAuth from '../../../hooks/useAuth';
 
 const MakeAdmin = () => {
+    const { isLoading } = useAuth();
     const [email, setEmail] = useState('');
     const [addAdmin, setAddAdmin] = useState(false);
+
+    if (isLoading) {
+        return <div className="text-center"><Spinner animation="border" variant="danger" /></div>
+    }
 
 
     const handleAdminEmail = e => {

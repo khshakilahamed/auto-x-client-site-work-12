@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import swal from 'sweetalert';
 import useAuth from '../../../hooks/useAuth';
 
 const Review = () => {
@@ -27,7 +28,8 @@ const Review = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('Review Added Successfully!');
+                    // alert('Review Added Successfully!');
+                    swal("Success!", "Order Placed!", "success");
                     console.log(data);
                 }
             })
@@ -46,7 +48,7 @@ const Review = () => {
                     <option value="5">5</option>
                 </select>
                 <textarea onChange={handleText} type="text" placeholder="Write About us" required />
-                <input className="order-btn" type="submit" value="Submit" />
+                <input disabled className="order-btn" type="submit" value="Submit" />
             </form>
         </div>
     );

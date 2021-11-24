@@ -7,7 +7,6 @@ const Explore = () => {
     return (
         <div>
             <Navigation></Navigation>
-
             <Bikes></Bikes>
             <Footer></Footer>
         </div>
