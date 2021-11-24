@@ -15,7 +15,7 @@ const ShowReview = () => {
 
             <div className="row text-center">
                 {
-                    reviews.map(review => <div key={review._id} className="col-md-4 mb-5">
+                    reviews.map(review => <div key={review._id} className="col-sm-6 col-md-4 col-lg-3 mb-5">
                         <div className="border py-5">
                             <img className="img-fluid w-25 pb-3" src={'https://i.ibb.co/y4yHs7B/review-icon.png'} alt="" />
                             <h2>{review.displayName}</h2>

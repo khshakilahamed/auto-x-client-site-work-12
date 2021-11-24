@@ -51,9 +51,9 @@ const ManageProducts = () => {
                 }
                 <div className="row my-5">
                     {
-                        bikes?.map(bike => <div key={bike._id} className="col-md-4">
+                        bikes?.map(bike => <div key={bike._id} className="col-md-6 col-lg-4">
                             <div className="border m-2">
-                                <img src={bike.image} alt="" />
+                                <img className="img-fluid w-100" src={bike.image} alt="" />
                                 <h4 className="my-3">{bike.bike_name}</h4>
                                 <div className="d-flex justify-content-between px-5 my-3">
                                     <p>
