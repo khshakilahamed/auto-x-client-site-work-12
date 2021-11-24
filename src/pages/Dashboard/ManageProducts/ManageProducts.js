@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const ManageProducts = () => {
     const [bikes, setBikes] = useState([]);
@@ -12,21 +13,32 @@ const ManageProducts = () => {
     }, [bikes]);
 
     const handleDeleteBike = id => {
-        const confirmDelete = window.confirm("Are you sure want to delete the bike ?");
-        if (confirmDelete) {
-            fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'content-type': 'application/json'
+
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this Bike!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'content-type': 'application/json'
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.acknowledged) {
+                                swal("Deleted", "The Bike is deleted!", "success");
+                            }
+                        })
+                } else {
+                    swal("The Bike is safe!");
                 }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.acknowledged) {
-                        alert('Deleted Successfully');
-                    }
-                })
-        }
+            });
 
     }
 

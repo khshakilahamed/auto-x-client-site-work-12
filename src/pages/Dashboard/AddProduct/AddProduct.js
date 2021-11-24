@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Spinner } from 'react-bootstrap';
+import swal from 'sweetalert';
 import useAuth from '../../../hooks/useAuth';
 import './AddProduct.css'
 
@@ -40,7 +41,7 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('Bike Added Successfully');
+                    swal("Added!", "Successfully added a Bike!", "success");
                     e.target.reset();
                 }
             })
@@ -50,11 +51,11 @@ const AddProduct = () => {
         <div className="my-4">
             <h2 className="text-center bg-danger text-light py-2 my-4">Add here a Bike with Details</h2>
             <form onSubmit={handleAddBike} className="add-product-form">
-                <input ref={bikeNameRef} type="text" placeholder="Bike Name" />
-                <input ref={brandRef} type="text" placeholder="Brand Name" />
-                <textarea ref={descriptionRef} name="" id="" cols="30" rows="5" placeholder="Write Here Short Description of Bike"></textarea>
-                <input ref={imageUrlRef} type="text" placeholder="Image URL Of Bike" />
-                <input ref={priceRef} type="text" placeholder="Price Of Bike" />
+                <input ref={bikeNameRef} type="text" placeholder="Bike Name" required />
+                <input ref={brandRef} type="text" placeholder="Brand Name" required />
+                <textarea ref={descriptionRef} name="" id="" cols="30" rows="5" placeholder="Write Here Short Description of Bike" required></textarea>
+                <input ref={imageUrlRef} type="text" placeholder="Image URL Of Bike" required />
+                <input ref={priceRef} type="text" placeholder="Price Of Bike" required />
                 <button className="order-btn">Add Bike</button>
             </form>
         </div>
