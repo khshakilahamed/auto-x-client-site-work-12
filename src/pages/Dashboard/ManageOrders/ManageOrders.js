@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
+import swal from 'sweetalert';
+import './ManageOrder.css'
 
 const ManageOrders = () => {
     const [orders, setOrders] = useState([]);
@@ -21,40 +23,62 @@ const ManageOrders = () => {
     // console.log(orders);
 
     const handleDeleteOrder = id => {
-        const confirmOrder = window.confirm('Are you sure, want to delete the order ?');
-        if (confirmOrder) {
-            fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'content-type': 'application.json'
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this order!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'content-type': 'application.json'
+                        }
+                    })
+                        .then(res => res.json())
+
+                    swal("The order has been deleted!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("The order is safe!");
                 }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.acknowledged) {
-                        alert('Deleted Successfully');
-                    }
-                })
-        }
+            });
 
     };
 
     const handleApproveOrder = id => {
-        const approved = window.confirm('Are you sure ?');
+        swal({
+            title: "Are you sure?",
+            text: "you want to approved the order!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    const matchedOrder = orders.filter(order => order._id === id);
+                    matchedOrder[0].orderStatus = "Approved";
 
-        if (approved) {
-            const matchedOrder = orders.filter(order => order._id === id);
-            matchedOrder[0].orderStatus = "Approved";
+                    fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(matchedOrder[0])
+                    })
+                        .then(res => res.json())
 
-            fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(matchedOrder[0])
-            })
-                .then(res => res.json())
-        }
+                    swal("The order has been Approved!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("The order is still pending!");
+                }
+            });
     }
 
     return (
@@ -63,35 +87,37 @@ const ManageOrders = () => {
             {
                 !orders && <div className="text-center"><Spinner animation="border" variant="danger" /></div>
             }
-            <table class="table table-success table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Customer Address</th>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Status</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        orders.map(order => <tr>
-                            <td className="border-end">Name: {order.userName} <br /> Email: {order.userEmail} <br /> Phone: {order.userPhoneNumber}</td>
-                            <td className="border-end">{order.userAddress} </td>
-                            <td className="border-end">{order.bike_name}</td>
-                            <td className="border-end">{order.price}</td>
-                            <td className="border-end">{order.orderStatus}</td>
-                            <td className="border-end">
-                                <button onClick={() => handleDeleteOrder(order._id)} style={{ border: 'none', backgroundColor: 'red', color: 'white', borderRadius: '5px', marginBottom: '5px' }}>Delete</button>
-                                {
-                                    order.orderStatus === 'pending' && <button onClick={() => handleApproveOrder(order._id)} style={{ border: 'none', marginLeft: '5px', backgroundColor: 'green', color: 'white', borderRadius: '5px' }}>Approve</button>
-                                }
-                            </td>
-                        </tr>)
-                    }
-                </tbody>
-            </table>
+            <div className="order-table-container">
+                <table class="table table-success table-striped mb-5">
+                    <thead>
+                        <tr>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Customer Address</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            orders.map(order => <tr>
+                                <td className="border-end">Name: {order.userName} <br /> Email: {order.userEmail} <br /> Phone: {order.userPhoneNumber}</td>
+                                <td className="border-end">{order.userAddress} </td>
+                                <td className="border-end">{order.bike_name}</td>
+                                <td className="border-end">{order.price}</td>
+                                <td className="border-end">{order.orderStatus}</td>
+                                <td className="border-end">
+                                    <button onClick={() => handleDeleteOrder(order._id)} style={{ border: 'none', backgroundColor: 'red', color: 'white', borderRadius: '5px', marginBottom: '5px' }}>Delete</button>
+                                    {
+                                        order.orderStatus === 'pending' && <button onClick={() => handleApproveOrder(order._id)} style={{ border: 'none', marginLeft: '5px', backgroundColor: 'green', color: 'white', borderRadius: '5px' }}>Approve</button>
+                                    }
+                                </td>
+                            </tr>)
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

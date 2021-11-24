@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import swal from 'sweetalert';
 import Footer from '../../Shared/Footer/Footer';
 import Navigation from '../../Shared/Navigation/Navigation';
 
@@ -43,24 +44,38 @@ const UpdateProduct = () => {
 
     const handleAddBike = e => {
         e.preventDefault();
-        const confirmUpdate = window.confirm("Are you sure want to update ?");
 
-        if (confirmUpdate) {
-            fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(bike)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.acknowledged) {
-                        alert('Successfully Updated');
-                        setBike({});
-                    }
-                })
-        }
+        swal({
+            title: "Are you sure?",
+            text: "Bike details will be changed!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(bike)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.acknowledged) {
+                                setBike({});
+                            }
+                        })
+
+
+                    swal("Bike details has been deleted!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Bike details is safe!");
+                }
+            });
     }
 
     useEffect(() => {

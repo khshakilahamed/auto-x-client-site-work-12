@@ -33,7 +33,7 @@ const Dashboard = () => {
             <Navigation></Navigation>
             <div className="container">
                 <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-md-3 col-lg-2">
                         <div className="py-5 border-end">
                             <h3 className="text-danger">Dashboard</h3>
 
@@ -59,7 +59,7 @@ const Dashboard = () => {
                         </div>
 
                     </div>
-                    <div className="col-md-10">
+                    <div className="col-md-9 col-lg-10">
                         <Switch>
                             <Route exact path={path}>
                                 {
