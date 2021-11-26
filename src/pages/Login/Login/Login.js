@@ -38,18 +38,18 @@ const Login = () => {
                         }
 
                         {
-                            toggle ? <p
-                                className="me-auto ps-4"
-                                onClick={() => setToggle(false)}
-                                style={{ cursor: 'pointer', color: 'blue' }}>
-                                <small>Don't Have Account ? click here</small>
+                            toggle ? <p className="me-auto ps-4">
+                                <small
+                                    onClick={() => setToggle(false)}
+                                    style={{ cursor: 'pointer', color: 'blue' }}
+                                > Don't Have Account ? click here
+                                </small>
                             </p>
                                 :
-                                <p
-                                    className="me-auto ps-4"
-                                    onClick={() => setToggle(true)}
-                                    style={{ cursor: 'pointer', color: 'blue' }}>
-                                    <small>Have Account ? click here</small>
+                                <p className="me-auto ps-4">
+                                    <small onClick={() => setToggle(true)}
+                                        style={{ cursor: 'pointer', color: 'blue' }}
+                                    >Have Account ? click here</small>
                                 </p>
                         }
 

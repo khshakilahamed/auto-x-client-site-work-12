@@ -34,13 +34,13 @@ const LoginForm = () => {
             <form onSubmit={handleUserLogin} className="login-form">
                 <input onBlur={handleEmailChange} type="email" name="" id="" placeholder="Email" />
                 <input onBlur={handlePasswordChange} type="password" name="" id="" placeholder="Password" />
+                <p ><small className="text-start text-danger" style={{ cursor: 'pointer' }}>Forgot password</small></p>
                 {
                     error && <div className="alert alert-danger my-0" role="alert">
                         {error}
                     </div>
                 }
                 <button type="submit" className="regular-btn">Login</button>
-
             </form>
         </div>
     );
