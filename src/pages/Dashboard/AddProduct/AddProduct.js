@@ -31,7 +31,7 @@ const AddProduct = () => {
         const newBike = { bike_name, image, short_des, brand, price }
         // console.log(newBike)
 
-        fetch('https://powerful-tundra-44421.herokuapp.com/bikes', {
+        fetch('http://localhost:5000/bikes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

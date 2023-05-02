@@ -33,7 +33,7 @@ const MakeAdmin = () => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    fetch(`https://powerful-tundra-44421.herokuapp.com/users/admin`, {
+                    fetch(`http://localhost:5000/users/admin`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json'
@@ -57,7 +57,7 @@ const MakeAdmin = () => {
             });
 
         // if (confirmAdmin) {
-        //     fetch(`https://powerful-tundra-44421.herokuapp.com/users/admin`, {
+        //     fetch(`http://localhost:5000/users/admin`, {
         //         method: 'PUT',
         //         headers: {
         //             'content-type': 'application/json'

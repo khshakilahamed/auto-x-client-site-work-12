@@ -7,7 +7,7 @@ const ManageProducts = () => {
     const [bikes, setBikes] = useState([]);
 
     useEffect(() => {
-        fetch('https://powerful-tundra-44421.herokuapp.com/bikes')
+        fetch('http://localhost:5000/bikes')
             .then(res => res.json())
             .then(data => setBikes(data))
     }, [bikes]);
@@ -23,7 +23,7 @@ const ManageProducts = () => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`, {
+                    fetch(`http://localhost:5000/bikes/${id}`, {
                         method: 'DELETE',
                         headers: {
                             'content-type': 'application/json'

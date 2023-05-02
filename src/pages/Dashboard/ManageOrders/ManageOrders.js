@@ -9,7 +9,7 @@ const ManageOrders = () => {
 
 
     useEffect(() => {
-        fetch(`https://powerful-tundra-44421.herokuapp.com/orders`)
+        fetch(`http://localhost:5000/orders`)
             .then(res => res.json())
             .then(data => {
                 setOrders(data);
@@ -32,7 +32,7 @@ const ManageOrders = () => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
+                    fetch(`http://localhost:5000/orders/${id}`, {
                         method: 'DELETE',
                         headers: {
                             'content-type': 'application.json'
@@ -63,7 +63,7 @@ const ManageOrders = () => {
                     const matchedOrder = orders.filter(order => order._id === id);
                     matchedOrder[0].orderStatus = "Approved";
 
-                    fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
+                    fetch(`http://localhost:5000/orders/${id}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json'

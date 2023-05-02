@@ -103,7 +103,7 @@ const useFirebase = () => {
     }, [auth]);
 
     useEffect(() => {
-        fetch(`https://powerful-tundra-44421.herokuapp.com/users/${user.email}`)
+        fetch(`http://localhost:5000/users/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setAdmin(data.admin);
@@ -114,7 +114,7 @@ const useFirebase = () => {
     const saveUser = (displayName, email) => {
         const user = { displayName, email };
         console.log(user);
-        fetch('https://powerful-tundra-44421.herokuapp.com/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -126,7 +126,7 @@ const useFirebase = () => {
 
     const saveGoogleUser = (displayName, email) => {
         const user = { displayName, email };
-        fetch('https://powerful-tundra-44421.herokuapp.com/users', {
+        fetch('http://localhost:5000/users', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

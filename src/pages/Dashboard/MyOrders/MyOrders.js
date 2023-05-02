@@ -9,7 +9,7 @@ const MyOrders = () => {
     // console.log(orders);
 
     useEffect(() => {
-        fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${user.email}`)
+        fetch(`http://localhost:5000/orders/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setOrders(data);
@@ -28,7 +28,7 @@ const MyOrders = () => {
             .then((willDelete) => {
                 if (willDelete) {
 
-                    fetch(`https://powerful-tundra-44421.herokuapp.com/orders/${id}`, {
+                    fetch(`http://localhost:5000/orders/${id}`, {
                         method: 'DELETE',
                         headers: {
                             'content-type': 'application.json'

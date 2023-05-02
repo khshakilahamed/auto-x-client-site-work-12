@@ -54,7 +54,7 @@ const UpdateProduct = () => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`, {
+                    fetch(`http://localhost:5000/bikes/${id}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json'
@@ -79,7 +79,7 @@ const UpdateProduct = () => {
     }
 
     useEffect(() => {
-        fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`)
+        fetch(`http://localhost:5000/bikes/${id}`)
             .then(res => res.json())
             .then(data => setBike(data))
     }, [id]);

@@ -18,7 +18,7 @@ const Review = () => {
     const handleReview = e => {
         e.preventDefault();
         const newReview = { displayName: user.displayName, email: user.email, rating, reviewText }
-        fetch('https://powerful-tundra-44421.herokuapp.com/reviews', {
+        fetch('http://localhost:5000/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

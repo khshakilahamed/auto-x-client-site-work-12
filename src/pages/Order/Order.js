@@ -40,7 +40,7 @@ const Order = () => {
             price
         }
 
-        fetch('https://powerful-tundra-44421.herokuapp.com/orders', {
+        fetch('http://localhost:5000/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -59,7 +59,7 @@ const Order = () => {
     };
 
     useEffect(() => {
-        fetch(`https://powerful-tundra-44421.herokuapp.com/bikes/${id}`)
+        fetch(`http://localhost:5000/bikes/${id}`)
             .then(res => res.json())
             .then(data => {
                 setBike(data);
